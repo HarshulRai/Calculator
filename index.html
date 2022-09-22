@@ -1,0 +1,154 @@
+<html lang="eng">
+    <head>
+        <title>Calculator</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div>
+            <div class="inputStyle">
+                <label class="labelStyle" for="number1">Number 1: </label>
+                <input type="text" id="number1" name="number1" /><br />
+            </div>
+            <br />
+            <div class="inputStyle">
+                <label class="labelStyle" for="number2">Number 2: </label>
+                <input type="text" id="number2" name="number2" /><br />
+            </div>
+            <br />
+            <div class="inputStyle">
+                <label class="labelStyle" for="result">Result: </label>
+                <input type="text" id="result" style="margin-left: 25px" />
+            </div>
+            <br /><br />
+        <button class="buttonStyle" onclick="add()">+</button>
+        <button class="buttonStyle" onclick="sub()">-</button>
+        <button class="buttonStyle" onclick="div()">/</button>
+        <button class="buttonStyle" onclick="mul()">*</button>
+        <br /><br />
+        <div style="margin-left: 80px">
+            <button class="buttonStyle" onclick="clearInput()">Clear All</button>
+        </div>
+        </div>
+        <br /><br />       
+        
+    </body>
+    <script>
+        function add() {
+            let a = document.getElementById("number1").value;
+            document.getElementById("number1").innerHTML = a;
+            let b = document.getElementById("number2").value;
+            document.getElementById('number2').innerHTML = b;
+            if (isNaN(a) || isNaN(b)) {
+                alert("Please Enter number");
+                return;
+            }
+            let data = {
+                a: a,
+                b: b,
+            };
+            fetch("http://localhost:3000/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Ans", data.ans);
+                document.getElementById("result").value = data.ans;
+            });
+        }
+
+        function div() {
+            let a = document.getElementById("number1").value;
+            document.getElementById("number1").innerHTML = a;
+            let b = document.getElementById("number2").value;
+            document.getElementById('number2').innerHTML = b;
+            if (isNaN(a) || isNaN(b)) {
+                alert("Please Enter number");
+                return;
+            }
+            let data = {
+                a: a,
+                b: b,
+            };
+            fetch("http://localhost:3000/div", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Ans", data.ans);
+                document.getElementById("result").value = data.ans;
+            });
+        }
+
+        function sub() {
+            let a = document.getElementById("number1").value;
+            document.getElementById("number1").innerHTML = a;
+            let b = document.getElementById("number2").value;
+            document.getElementById('number2').innerHTML = b;
+            if (isNaN(a) || isNaN(b)) {
+                alert("Please Enter number");
+                return;
+            }
+            let data = {
+                a: a,
+                b: b,
+            };
+            fetch("http://localhost:3000/sub", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Ans", data.ans);
+                document.getElementById("result").value = data.ans;
+            });
+        }
+
+        function mul() {
+            let a = document.getElementById("number1").value;
+            document.getElementById("number1").innerHTML = a;
+            let b = document.getElementById("number2").value;
+            document.getElementById('number2').innerHTML = b;
+            if (isNaN(a) || isNaN(b)) {
+                alert("Please Enter number");
+                return;
+            }
+            let data = {
+                a: a,
+                b: b,
+            };
+            fetch("http://localhost:3000/mul", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Ans", data.ans);
+                document.getElementById("result").value = data.ans;
+            });
+        }
+
+        function clearInput() {
+            document.getElementById("number1").value = "";
+            document.getElementById("number2").value = "";
+            document.getElementById("result").value = "";
+        }
+    </script>
+</html>
